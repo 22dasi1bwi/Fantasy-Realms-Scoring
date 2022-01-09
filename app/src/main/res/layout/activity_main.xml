@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/bgColor"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:id="@+id/calculateYourTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CALCULATE YOUR"
+        android:textStyle="bold"
+        android:textColor="@color/textBlue"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:id="@+id/ageTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="AGE"
+        android:padding="10dp"
+        android:background="@color/textBgColor"
+        android:textStyle="bold"
+        android:textColor="@color/textBlue"
+        android:textSize="25sp"
+        />
+
+    <TextView
+        android:id="@+id/inMinutesTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="IN MINUTES"
+        android:textStyle="bold"
+        android:textColor="@color/textBlue"
+        android:textSize="25sp"
+        />
+
+    <Button
+        android:id="@+id/selectDateButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SELECT DATE"
+        android:textColor="@color/textBlue"
+        android:textStyle="bold"
+        android:backgroundTint="@color/buttonColor"
+        />
+
+    <TextView
+        android:id="@+id/actualDateSelectedTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="14/09/2021"
+        android:textColor="@color/textBlue"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:id="@+id/selectedDateInfoTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Date"
+        android:alpha="@android:integer/config_shortAnimTime"
+        android:textColor="@color/textBlue"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/actualTimeInMinutesTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:text="1440"
+        android:textColor="@color/textBlue"
+        android:textSize="25sp"
+        />
+    <TextView
+        android:id="@+id/timeInMinutesTextInfoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In minutes till date"
+        android:alpha="@android:integer/config_shortAnimTime"
+        android:textColor="@color/textBlue"
+        android:textSize="20sp"
+        />
+
+</LinearLayout>
