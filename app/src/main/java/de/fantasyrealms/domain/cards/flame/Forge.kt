@@ -1,16 +1,16 @@
 package de.fantasyrealms.domain.cards.flame
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.FORGE
 
-object Forge : Card {
-    override val id: Int = 18
-    override val name: String = "Forge"
-    override val baseScore: Int = 9
-    override val suit: Suit = Suit.FLAME
+private const val MODIFIER = 9
+
+class Forge : AbstractCard(FORGE) {
     override val effectDefinition: EffectDefinition =
-        EffectDefinition("BONUS: +9 for each Weapon and Artifact.", EffectType.BONUS)
-
-    override fun getScoreInHand(hand: Hand): Int {
-        TODO("Not yet implemented")
-    }
+        EffectDefinition("BONUS: +$MODIFIER for each Weapon and Artifact.", setOf(
+            ForEachCondition(this, EffectType.BONUS) {
+                it.filter { card -> card.suit == Suit.WEAPON || card.suit == Suit.ARTIFACT }
+                    .map { card -> ConditionMatch(card, MODIFIER) }
+            }
+        ))
 }

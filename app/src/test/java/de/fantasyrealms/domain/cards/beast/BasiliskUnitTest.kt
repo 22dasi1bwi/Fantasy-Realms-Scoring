@@ -12,40 +12,44 @@ class BasiliskUnitTest {
 
     @Test
     fun `returns base score`() {
-        val hand = handOf(Basilisk, Knights)
+        val basilisk = Basilisk()
+        val hand = handOf(basilisk, Knights())
 
-        val score = hand.getScore(Basilisk)
+        val score = hand.getTotalScore()[basilisk]
 
-        assertThat(score).isEqualTo(Basilisk.baseScore)
+        assertThat(score).isEqualTo(basilisk.baseScore)
     }
 
     @Test
     fun `blanks all Armies`() {
-        val hand = handOf(Basilisk, LightCavalry)
+        val basilisk = Basilisk()
+        val hand = handOf(basilisk, LightCavalry())
 
-        val score = hand.getTotalScore()
+        val score = hand.getTotalScore().raw
 
         // total score should not contains LightCavalry's score, since it has been blanked
-        assertThat(score).isEqualTo(Basilisk.baseScore)
+        assertThat(score).isEqualTo(basilisk.baseScore)
     }
 
     @Test
     fun `blanks all Leaders`() {
-        val hand = handOf(Basilisk, Empress)
+        val basilisk = Basilisk()
+        val hand = handOf(basilisk, Empress())
 
-        val score = hand.getTotalScore()
+        val score = hand.getTotalScore().raw
 
         // total score should not contains Empress's score, since it has been blanked
-        assertThat(score).isEqualTo(Basilisk.baseScore)
+        assertThat(score).isEqualTo(basilisk.baseScore)
     }
 
     @Test
     fun `blanks all other Beasts`() {
-        val hand = handOf(Basilisk, Warhorse)
+        val basilisk = Basilisk()
+        val hand = handOf(basilisk, Warhorse())
 
-        val score = hand.getTotalScore()
+        val score = hand.getTotalScore().raw
 
         // total score should not contains Warhorse's score, since it has been blanked
-        assertThat(score).isEqualTo(Basilisk.baseScore)
+        assertThat(score).isEqualTo(basilisk.baseScore)
     }
 }

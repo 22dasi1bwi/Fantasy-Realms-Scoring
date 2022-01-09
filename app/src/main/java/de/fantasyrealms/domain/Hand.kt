@@ -1,25 +1,26 @@
 package de.fantasyrealms.domain
 
+import de.fantasyrealms.EventLog
 
-data class Hand(private val cards: Set<Card>) {
+data class Hand(private val cards: Set<AbstractCard>) {
 
-    init {
-//        require(cards.size == 7)
+    val ordered: List<AbstractCard> = cards.sorted()
+
+    fun getTotalScore(): TotalScore {
+        val eventLog = EventLog.start()
+
+        val scores = ordered
+            .flatMap { applyEffects(eventLog, it) }
+            .groupBy { it.effectReceiver }
+            .map { (receiver, events) -> receiver.getScore(events) }
+        println(eventLog)
+        return TotalScore(scores)
     }
 
-    fun getTotalScore(): Int {
-        return cards.map(::getScore).sum()
-    }
-
-    fun getScore(card: Card): Int {
-        return card.effectDefinition.effects.map { it.apply(this) }.sum() + card.baseScore
-    }
-
-    fun searchBy(vararg cards: Card): Set<Card> {
-        return this.cards.filter { cards.contains(it) }.toSet()
-    }
-
-    fun searchBy(vararg suits: Suit): Set<Card> {
-        return cards.filter { suits.contains(it.suit) }.toSet()
+    private fun applyEffects(eventLog: EventLog, card: AbstractCard): List<Event> {
+        return card.effectDefinition.effects.fold(mutableListOf<Event>(BaseEvent(card))) { acc, condition ->
+            acc.addAll(condition.apply(eventLog, ordered))
+            acc
+        }
     }
 }

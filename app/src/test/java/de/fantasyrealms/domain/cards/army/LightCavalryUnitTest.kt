@@ -12,19 +12,21 @@ class LightCavalryUnitTest {
 
     @Test
     fun `-2 for each Land`() {
-        val hand = handOf(LightCavalry, EarthElemental, Cavern)
+        val lightCavalry = LightCavalry()
+        val hand = handOf(lightCavalry, EarthElemental(), Cavern())
 
-        val score = hand.getScore(LightCavalry)
+        val score = hand.getTotalScore()[lightCavalry]
 
-        assertThat(score).isEqualTo(LightCavalry.baseScore - 2 - 2)
+        assertThat(score).isEqualTo(lightCavalry.baseScore - 2 - 2)
     }
 
     @Test
     fun `no penalty when no Land is present`() {
-        val hand = handOf(LightCavalry, Empress)
+        val lightCavalry = LightCavalry()
+        val hand = handOf(lightCavalry, Empress())
 
-        val score = hand.getScore(LightCavalry)
+        val score = hand.getTotalScore()[lightCavalry]
 
-        assertThat(score).isEqualTo(LightCavalry.baseScore)
+        assertThat(score).isEqualTo(lightCavalry.baseScore)
     }
 }

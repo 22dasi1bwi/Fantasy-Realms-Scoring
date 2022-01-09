@@ -1,34 +1,25 @@
 package de.fantasyrealms.domain.cards.army
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.KNIGHTS
 
-object Knights : Card {
-    override val id: Int = 21
-    override val name: String = "Knights"
-    override val baseScore: Int = 20
-    override val suit: Suit = Suit.ARMY
+private const val MODIFIER = -8
+
+class Knights : AbstractCard(KNIGHTS) {
     override val effectDefinition: EffectDefinition =
         EffectDefinition(
-            "PENALTY: -8 unless with at least one Leader.",
+            "PENALTY: $MODIFIER unless with at least one Leader.",
             setOf(
-                AtLeastEffect(
-                    EffectType.PENALTY,
-                    Suit.LEADER,
-                    includeSelf = this to true,
-                    modifier = -8
-                )
+                UnlessWithCondition(this, EffectType.PENALTY) {
+                    val firstLeader = it.firstOrNull { card -> card.suit == Suit.LEADER }
+                    if (firstLeader != null) {
+                        listOf(ConditionMiss(firstLeader, 0))
+                    } else {
+                        // TODO: this?
+                        listOf(ConditionMatch(this, MODIFIER))
+                    }
+                }
+
             )
         )
-
-    override fun getScoreInHand(hand: Hand): Int {
-        val cardsTriggeringEffect = hand.searchBy(Suit.LEADER)
-
-        val anyLeaderCard = cardsTriggeringEffect.any { it.suit == Suit.LEADER }
-
-        return if (anyLeaderCard) {
-            baseScore
-        } else {
-            baseScore - 8
-        }
-    }
 }

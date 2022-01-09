@@ -1,16 +1,19 @@
 package de.fantasyrealms.domain.cards.land
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.EARTH_ELEMENTAL
 
-object EarthElemental : Card {
-    override val id: Int = 5
-    override val name: String = "Earth Elemental"
-    override val baseScore: Int = 4
-    override val suit: Suit = Suit.LAND
+private const val MODIFIER = 15
+
+class EarthElemental : AbstractCard(EARTH_ELEMENTAL) {
     override val effectDefinition: EffectDefinition =
-        EffectDefinition("BONUS: +15 for each other Land.", EffectType.BONUS)
-
-    override fun getScoreInHand(hand: Hand): Int {
-        TODO("Not yet implemented")
-    }
+        EffectDefinition(
+            "BONUS: +$MODIFIER for each other Land.",
+            setOf(
+                ForEachCondition(this, EffectType.BONUS) {
+                    it.filter { card -> card.suit == Suit.LAND }
+                        .map { card -> ConditionMatch(card, MODIFIER) }
+                }
+            )
+        )
 }

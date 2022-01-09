@@ -13,21 +13,23 @@ class BeastmasterUnitTest {
 
     @Test
     fun `+9 for each Beast`() {
-        val hand = handOf(Beastmaster, Dragon, Warhorse)
+        val beastmaster = Beastmaster()
+        val hand = handOf(beastmaster, Dragon(), Warhorse())
 
-        val score = hand.getScore(Beastmaster)
+        val score = hand.getTotalScore()[beastmaster]
 
-        assertThat(score).isEqualTo(Beastmaster.baseScore + 9 + 9)
+        assertThat(score).isEqualTo(beastmaster.baseScore + 9 + 9)
     }
 
     @Test
     fun `clears the penalty on all Beasts`() {
-        // Basilisk blanks all Armies, Leaders and other Beasts
-        // Beastmaster's effect should clear that
-        val hand = handOf(Beastmaster, Basilisk, LightCavalry)
+        val beastmaster = Beastmaster()
+        val basilisk = Basilisk()
+        val lightCavalry = LightCavalry() // normally blanked by Basilisk
+        val hand = handOf(basilisk, beastmaster, lightCavalry)
 
-        val score = hand.getTotalScore()
+        val lightCavalryScore = hand.getTotalScore()[lightCavalry] // should not be blanked
 
-        assertThat(score).isEqualTo(Beastmaster.baseScore + 9 + Basilisk.baseScore + LightCavalry.baseScore)
+        assertThat(lightCavalryScore).isEqualTo(lightCavalry.baseScore)
     }
 }

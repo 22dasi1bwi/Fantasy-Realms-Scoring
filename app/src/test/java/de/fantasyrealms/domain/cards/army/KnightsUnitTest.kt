@@ -12,28 +12,31 @@ class KnightsUnitTest {
 
     @Test
     fun `-8 when without Leader`() {
-        val hand = handOf(Knights, Beastmaster)
+        val knights = Knights()
+        val hand = handOf(knights, Beastmaster())
 
-        val score = hand.getScore(Knights)
+        val score = hand.getTotalScore()[knights]
 
-        assertThat(score).isEqualTo(Knights.baseScore - 8)
+        assertThat(score).isEqualTo(knights.baseScore - 8)
     }
 
     @Test
     fun `no penalty when with Leader`() {
-        val hand = handOf(Knights, Empress)
+        val knights = Knights()
+        val hand = handOf(knights, Empress())
 
-        val score = hand.getScore(Knights)
+        val score = hand.getTotalScore()[knights]
 
-        assertThat(score).isEqualTo(Knights.baseScore)
+        assertThat(score).isEqualTo(knights.baseScore)
     }
 
     @Test
     fun `multiple Leaders have no additional effect`() {
-        val hand = handOf(Knights, Empress, Princess)
+        val knights = Knights()
+        val hand = handOf(knights, Empress(), Princess())
 
-        val score = hand.getScore(Knights)
+        val score = hand.getTotalScore()[knights]
 
-        assertThat(score).isEqualTo(Knights.baseScore)
+        assertThat(score).isEqualTo(knights.baseScore)
     }
 }

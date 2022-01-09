@@ -1,28 +1,19 @@
 package de.fantasyrealms.domain.cards.army
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.LIGHT_CAVALRY
 
-object LightCavalry : Card {
-    override val id: Int = 23
-    override val name: String = "Light Cavalry"
-    override val baseScore: Int = 17
-    override val suit: Suit = Suit.ARMY
+private const val MODIFIER = -2
+
+class LightCavalry : AbstractCard(LIGHT_CAVALRY) {
     override val effectDefinition: EffectDefinition =
         EffectDefinition(
-            "PENALTY: -2 for each Land.",
+            "PENALTY: $MODIFIER for each Land.",
             setOf(
-                DefaultEffect(
-                    EffectType.PENALTY,
-                    Suit.LAND,
-                    includeSelf = this to true,
-                    modifier = -2
-                )
+                ForEachCondition(this, EffectType.PENALTY) {
+                    val lands = it.filter { card -> card.suit == Suit.LAND }
+                    lands.map { card -> ConditionMatch(card, MODIFIER) }
+                }
             )
         )
-
-    override fun getScoreInHand(hand: Hand): Int {
-        val cardsTriggeringEffect = hand.searchBy(Suit.LAND)
-
-        return baseScore - cardsTriggeringEffect.size * 2
-    }
 }

@@ -1,16 +1,24 @@
 package de.fantasyrealms.domain.cards.beast
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.DRAGON
 
-object Dragon : Card {
-    override val id: Int = 39
-    override val name: String = "Dragon"
-    override val baseScore: Int = 30
-    override val suit: Suit = Suit.BEAST
+private const val MODIFIER = -40
+
+class Dragon : AbstractCard(DRAGON) {
     override val effectDefinition: EffectDefinition =
-        EffectDefinition("PENALTY: -40 unless with at least one Wizard.", EffectType.PENALTY)
+        EffectDefinition(
+            "PENALTY: $MODIFIER unless with at least one Wizard.",
+            setOf(
+                UnlessWithCondition(this, EffectType.PENALTY) {
+                    val wizard = it.firstOrNull { card -> card.suit == Suit.WIZARD }
+                    if (wizard != null){
+                        listOf(ConditionMiss(wizard))
+                    }else {
+                        // TODO this?
+                        listOf(ConditionMatch(this, MODIFIER))
+                    }
 
-    override fun getScoreInHand(hand: Hand): Int {
-        return 0
-    }
+                })
+        )
 }

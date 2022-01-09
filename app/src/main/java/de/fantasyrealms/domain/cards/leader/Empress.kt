@@ -1,25 +1,26 @@
 package de.fantasyrealms.domain.cards.leader
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.Card.EMPRESS
 
-object Empress : Card {
-    override val id: Int = 35
-    override val name: String = "Empress"
-    override val baseScore: Int = 15
-    override val suit: Suit = Suit.LEADER
+private const val BONUS_ARMY_MODIFIER = 10
+private const val PENALTY_OTHER_LEADER_MODIFIER = -5
+
+class Empress : AbstractCard(EMPRESS) {
     override val effectDefinition: EffectDefinition = EffectDefinition(
-        "BONUS: +10 for each Army. PENALTY: -5 for each other Leader.",
+        "BONUS: +$BONUS_ARMY_MODIFIER for each Army. PENALTY: $PENALTY_OTHER_LEADER_MODIFIER for each other Leader.",
         setOf(
-            DefaultEffect(EffectType.BONUS, Suit.ARMY, includeSelf = this to true, modifier = 10),
-            DefaultEffect(EffectType.PENALTY, Suit.LEADER, includeSelf = this to false, modifier = -5)
+            ForEachCondition(this, EffectType.BONUS) {
+                it.filter { card -> card.suit == Suit.ARMY }
+                    .map { card -> ConditionMatch(card, BONUS_ARMY_MODIFIER) }
+            },
+            ForEachCondition(
+                this,
+                EffectType.PENALTY
+            ) {
+                it.filter { card -> card.suit == Suit.LEADER }
+                    .map { card -> ConditionMatch(card, PENALTY_OTHER_LEADER_MODIFIER) }
+            }
         )
     )
-
-    override fun getScoreInHand(hand: Hand): Int {
-        val cardsTriggeringEffect = hand.searchBy(Suit.ARMY, Suit.LEADER).filter { this != it }
-
-        val (armies, otherLeaders) = cardsTriggeringEffect.partition { it.suit == Suit.ARMY }
-
-        return baseScore + armies.size * 10 - otherLeaders.size * 5
-    }
 }
