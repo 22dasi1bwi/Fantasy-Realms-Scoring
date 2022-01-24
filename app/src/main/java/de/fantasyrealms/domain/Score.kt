@@ -1,5 +1,7 @@
 package de.fantasyrealms.domain
 
+import de.fantasyrealms.domain.cards.AbstractCard
+
 const val ZERO = 0
 
 data class TotalScore(private val scores: List<Score>) {

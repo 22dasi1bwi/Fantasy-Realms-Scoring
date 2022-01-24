@@ -2,12 +2,11 @@ package de.fantasyrealms.domain.cards
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import de.fantasyrealms.domain.Effect
 import de.fantasyrealms.domain.EffectType
-import de.fantasyrealms.domain.ForEachEvent
 import de.fantasyrealms.domain.cards.army.LightCavalry
 import de.fantasyrealms.domain.cards.land.EarthElemental
 import de.fantasyrealms.domain.cards.leader.Princess
+import de.fantasyrealms.domain.event.ForEachEvent
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
@@ -28,7 +27,7 @@ class AbstractCardUnitTest {
         @Test
         fun `returns Zero if Card is blanked`() {
             val card = Princess()
-            card.blanked = true
+            card.effectDefinition.conditions.forEach { it.blank() }
             val event = ForEachEvent(card, LightCavalry(), EffectType.BONUS, 5)
 
             val score = card.getScore(listOf(event))
@@ -39,7 +38,7 @@ class AbstractCardUnitTest {
         @Test
         fun `returns Zero for Event indicating Penalty and Card has been cleared`() {
             val card = LightCavalry()
-            card.cleared = true
+            card.effectDefinition.conditions.forEach { it.clear() }
             val zeroScoreEvent = ForEachEvent(card, EarthElemental(), EffectType.PENALTY, -2)
             val event = ForEachEvent(card, LightCavalry(), EffectType.BONUS, 5)
 
@@ -51,7 +50,6 @@ class AbstractCardUnitTest {
         @Test
         fun `returns Effect modifier for Event if Card has not been cleared`() {
             val card = LightCavalry()
-            card.cleared = false
             val event = ForEachEvent(card, EarthElemental(), EffectType.PENALTY, -2)
 
             val score = card.getScore(listOf(event))
@@ -62,7 +60,7 @@ class AbstractCardUnitTest {
         @Test
         fun `returns Effect modifier for Event indicating a non-penalty for Card that has been cleared`() {
             val card = LightCavalry()
-            card.cleared = true
+            card.effectDefinition.conditions.forEach { it.clear() }
             val event = ForEachEvent(card, LightCavalry(), EffectType.BONUS, 5)
 
             val score = card.getScore(listOf(event))

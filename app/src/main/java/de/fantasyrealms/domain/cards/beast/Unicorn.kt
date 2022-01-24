@@ -1,6 +1,10 @@
 package de.fantasyrealms.domain.cards.beast
 
 import de.fantasyrealms.domain.*
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card
+import de.fantasyrealms.domain.condition.ConditionMatch
+import de.fantasyrealms.domain.condition.OneTimeCondition
 
 private const val WITH_PRINCESS_MODIFIER = 30
 private const val WITH_EMPRESS_OR_QUEEN_OR_ENCHANTRESS_MODIFIER = 15
@@ -10,7 +14,7 @@ class Unicorn : AbstractCard(Card.UNICORN) {
         "BONUS: +$WITH_PRINCESS_MODIFIER with Princess, " +
                 "+$WITH_EMPRESS_OR_QUEEN_OR_ENCHANTRESS_MODIFIER with Empress, Queen, or Enchantress",
         setOf(
-            OneTimeCondition(this, EffectType.BONUS) {
+            OneTimeCondition(EffectType.BONUS) {
                 val princess = it.firstOrNull { card -> card.id == Card.PRINCESS.id }
                 if (princess != null) {
                     return@OneTimeCondition listOf(ConditionMatch(princess, WITH_PRINCESS_MODIFIER))
@@ -27,7 +31,7 @@ class Unicorn : AbstractCard(Card.UNICORN) {
                     )
                 }
 
-                listOf(ConditionMiss(this))
+                listOf()
             }
         )
     )

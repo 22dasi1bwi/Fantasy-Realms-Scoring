@@ -1,12 +1,10 @@
 package de.fantasyrealms.domain
 
+import de.fantasyrealms.domain.condition.Condition
+
 class EffectDefinition(
     val text: String,
-    val effects: Set<Condition>
-)
-data class Effect(
-    val type: EffectType,
-    val modifier: Int = 0
+    val conditions: Set<Condition>
 )
 
 enum class EffectType {
@@ -14,5 +12,6 @@ enum class EffectType {
     PENALTY,
     BLANK,
     CLEAR,
+    TRANSFORM,
     NONE
 }

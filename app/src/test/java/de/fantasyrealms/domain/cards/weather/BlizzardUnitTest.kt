@@ -72,6 +72,6 @@ class BlizzardUnitTest {
 
         hand.getTotalScore()
 
-        assertThat(swamp.blanked).isTrue()
+        assertThat(swamp.isBlanked()).isTrue()
     }
 }

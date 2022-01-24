@@ -1,7 +1,11 @@
 package de.fantasyrealms.domain.cards.land
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.EARTH_ELEMENTAL
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card.EARTH_ELEMENTAL
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.BonusCondition
+import de.fantasyrealms.domain.condition.ConditionMatch
 
 private const val MODIFIER = 15
 
@@ -10,7 +14,7 @@ class EarthElemental : AbstractCard(EARTH_ELEMENTAL) {
         EffectDefinition(
             "BONUS: +$MODIFIER for each other Land.",
             setOf(
-                ForEachCondition(this, EffectType.BONUS) {
+                BonusCondition {
                     it.filter { card -> card.suit == Suit.LAND }
                         .map { card -> ConditionMatch(card, MODIFIER) }
                 }

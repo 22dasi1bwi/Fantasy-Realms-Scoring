@@ -1,7 +1,12 @@
 package de.fantasyrealms.domain.cards.army
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.KNIGHTS
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.EffectType
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card.KNIGHTS
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.ConditionMatch
+import de.fantasyrealms.domain.condition.OneTimeCondition
 
 private const val MODIFIER = -8
 
@@ -10,10 +15,10 @@ class Knights : AbstractCard(KNIGHTS) {
         EffectDefinition(
             "PENALTY: $MODIFIER unless with at least one Leader.",
             setOf(
-                UnlessWithCondition(this, EffectType.PENALTY) {
+                OneTimeCondition(EffectType.PENALTY) {
                     val firstLeader = it.firstOrNull { card -> card.suit == Suit.LEADER }
                     if (firstLeader != null) {
-                        listOf(ConditionMiss(firstLeader, 0))
+                        listOf()
                     } else {
                         // TODO: this?
                         listOf(ConditionMatch(this, MODIFIER))

@@ -1,7 +1,11 @@
 package de.fantasyrealms.domain.cards.army
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.LIGHT_CAVALRY
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card.LIGHT_CAVALRY
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.ConditionMatch
+import de.fantasyrealms.domain.condition.PenaltyCondition
 
 private const val MODIFIER = -2
 
@@ -10,7 +14,7 @@ class LightCavalry : AbstractCard(LIGHT_CAVALRY) {
         EffectDefinition(
             "PENALTY: $MODIFIER for each Land.",
             setOf(
-                ForEachCondition(this, EffectType.PENALTY) {
+                PenaltyCondition {
                     val lands = it.filter { card -> card.suit == Suit.LAND }
                     lands.map { card -> ConditionMatch(card, MODIFIER) }
                 }

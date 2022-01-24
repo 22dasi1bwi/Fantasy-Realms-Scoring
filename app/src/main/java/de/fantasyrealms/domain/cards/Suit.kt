@@ -1,4 +1,4 @@
-package de.fantasyrealms.domain
+package de.fantasyrealms.domain.cards
 
 enum class Suit {
     ARMY,

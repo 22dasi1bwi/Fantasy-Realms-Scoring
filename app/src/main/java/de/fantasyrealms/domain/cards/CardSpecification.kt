@@ -1,4 +1,4 @@
-package de.fantasyrealms.domain
+package de.fantasyrealms.domain.cards
 
 
 enum class Card(private val cardSpecification: CardSpecification) {
@@ -8,22 +8,28 @@ enum class Card(private val cardSpecification: CardSpecification) {
     ELVEN_ARCHERS(CardSpecification(22, "Elven Archers", 10, Suit.ARMY)),
     KNIGHTS(CardSpecification(21, "Knights", 20, Suit.ARMY)),
     LIGHT_CAVALRY(CardSpecification(23, "Light Cavalry", 17, Suit.ARMY)),
+    RANGERS(CardSpecification(25, "Rangers", 5, Suit.ARMY)),
 
     // ----- ARTIFACT -----
     BOOK_OF_CHANGES(CardSpecification(49, "Book Of Changes", 3, Suit.ARTIFACT)),
+    GEM_OF_ORDER(CardSpecification(47, "Gem Of Order", 5, Suit.ARTIFACT)),
     PROTECTION_RUNE(CardSpecification(50, "Protection Rune", 1, Suit.ARTIFACT)),
+    SHIELD_OF_KETH(CardSpecification(49, "Shield Of Keth", 3, Suit.ARTIFACT)),
+    WORLD_TREE(CardSpecification(48, "World Tree", 2, Suit.ARTIFACT)),
 
     // ----- BEAST -----
     BASILISK(CardSpecification(37, "Basilisk", 35, Suit.BEAST)),
     DRAGON(CardSpecification(39, "Dragon", 30, Suit.BEAST)),
     UNICORN(CardSpecification(36, "Unicorn", 9, Suit.BEAST)),
     WARHORSE(CardSpecification(38, "Warhorse", 6, Suit.BEAST)),
+    HYDRA(CardSpecification(40, "Hydra", 12, Suit.BEAST)),
 
     // ----- FLAME -----
     FIRE_ELEMENTAL(CardSpecification(20, "Fire Elemental", 4, Suit.FLAME)),
     FORGE(CardSpecification(18, "Forge", 9, Suit.FLAME)),
     LIGHTNING(CardSpecification(19, "Lightning", 11, Suit.FLAME)),
     WILDFIRE(CardSpecification(16, "Wildfire", 40, Suit.FLAME)),
+    CANDLE(CardSpecification(17, "Candle", 2, Suit.FLAME)),
 
     // ----- FLOOD -----
     GREAT_FLOOD(CardSpecification(8, "Great Flood", 32, Suit.FLOOD)),
@@ -36,6 +42,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
     EARTH_ELEMENTAL(CardSpecification(5, "Earth Elemental", 4, Suit.LAND)),
     FOREST(CardSpecification(4, "Forest", 7, Suit.LAND)),
     MOUNTAIN(CardSpecification(1, "Mountain", 9, Suit.LAND)),
+    BELL_TOWER(CardSpecification(3, "Bell Tower", 8, Suit.LAND)),
 
     // ----- LEADER -----
     EMPRESS(CardSpecification(35, "Empress", 15, Suit.LEADER)),
@@ -45,6 +52,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
 
     // ----- WEAPON -----
     MAGIC_WAND(CardSpecification(42, "Magic Wand", 1, Suit.WEAPON)),
+    SWORD_OF_KETH(CardSpecification(43, "Sword Of Keth", 7, Suit.WEAPON)),
 
     // ----- WEATHER -----
     BLIZZARD(CardSpecification(12, "Blizzard", 30, Suit.WEATHER)),

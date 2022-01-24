@@ -30,7 +30,7 @@ class SmokeUnitTest {
 
         assertAll {
             assertThat(score).isEqualTo(0)
-            assertThat(smoke.blanked).isTrue()
+            assertThat(smoke.isBlanked()).isTrue()
         }
     }
 }

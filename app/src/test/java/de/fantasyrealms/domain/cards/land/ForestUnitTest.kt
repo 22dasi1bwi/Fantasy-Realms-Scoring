@@ -44,10 +44,10 @@ class ForestUnitTest {
     @Test
     fun `+12 for each Elven Archers and Beast`() {
         val forest = Forest()
-        val hand = handOf(forest, Warhorse(), ElvenArchers(), ElvenArchers())
+        val hand = handOf(forest, Warhorse(), ElvenArchers())
 
         val score = hand.getTotalScore()[forest]
 
-        assertThat(score).isEqualTo(forest.baseScore + 12 + 12 + 12)
+        assertThat(score).isEqualTo(forest.baseScore + 12 + 12)
     }
 }

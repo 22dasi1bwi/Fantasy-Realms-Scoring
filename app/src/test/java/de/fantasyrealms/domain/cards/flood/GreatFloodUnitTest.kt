@@ -40,7 +40,7 @@ class GreatFloodUnitTest {
 
             hand.getTotalScore()[greatFlood]
 
-            assertThat(knights.blanked).isTrue()
+            assertThat(knights.isBlanked()).isTrue()
         }
 
         @Test
@@ -53,8 +53,8 @@ class GreatFloodUnitTest {
             hand.getTotalScore()[greatFlood]
 
             assertAll {
-                assertThat(earthElemental.blanked).isTrue()
-                assertThat(cavern.blanked).isTrue()
+                assertThat(earthElemental.isBlanked()).isTrue()
+                assertThat(cavern.isBlanked()).isTrue()
             }
         }
 
@@ -68,8 +68,8 @@ class GreatFloodUnitTest {
             hand.getTotalScore()[greatFlood]
 
             assertAll {
-                assertThat(earthElemental.blanked).isFalse() // mountain clears Great Flood, thus not blanking EarthElemental
-                assertThat(mountain.blanked).isFalse()
+                assertThat(earthElemental.isBlanked()).isFalse() // mountain clears Great Flood, thus not blanking EarthElemental
+                assertThat(mountain.isBlanked()).isFalse()
             }
         }
 
@@ -83,8 +83,8 @@ class GreatFloodUnitTest {
             hand.getTotalScore()[greatFlood]
 
             assertAll {
-                assertThat(fireElemental.blanked).isTrue()
-                assertThat(lightning.blanked).isFalse()
+                assertThat(fireElemental.isBlanked()).isTrue()
+                assertThat(lightning.isBlanked()).isFalse()
             }
         }
     }

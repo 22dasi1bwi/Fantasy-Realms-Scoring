@@ -1,13 +1,18 @@
 package de.fantasyrealms.domain.cards.flood
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.*
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card
+import de.fantasyrealms.domain.cards.Card.*
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.BlankCondition
+import de.fantasyrealms.domain.condition.ConditionMatch
 
 class GreatFlood : AbstractCard(GREAT_FLOOD) {
     override val effectDefinition: EffectDefinition = EffectDefinition(
         "PENALTY: Blanks all Armies, all Land except Mountain, all Flames except Lightning.",
         setOf(
-            BlankCondition(this) {
+            BlankCondition {
                 it.filter { card ->
                     card.suit == Suit.ARMY ||
                             (card.suit == Suit.LAND && card.name != MOUNTAIN.cardName) ||

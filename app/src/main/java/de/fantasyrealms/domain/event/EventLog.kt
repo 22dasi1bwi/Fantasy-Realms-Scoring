@@ -1,7 +1,6 @@
-package de.fantasyrealms
+package de.fantasyrealms.domain.event
 
-import de.fantasyrealms.domain.AbstractCard
-import de.fantasyrealms.domain.Event
+import de.fantasyrealms.domain.cards.AbstractCard
 
 private const val START = "---------- EVENT LOG START ----------"
 private const val TEMPLATE = "\n%s=\n\t%s"
@@ -13,6 +12,11 @@ class EventLog private constructor() {
 
     fun append(event: Event) {
         eventsByCard.getOrPut(event.effectReceiver) { mutableListOf() }.add(event)
+    }
+
+    fun end() {
+        println(this)
+        eventsByCard.clear()
     }
 
     override fun toString(): String {

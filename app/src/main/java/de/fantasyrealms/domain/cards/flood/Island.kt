@@ -1,7 +1,11 @@
 package de.fantasyrealms.domain.cards.flood
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.ISLAND
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card.ISLAND
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.ClearCondition
+import de.fantasyrealms.domain.condition.ConditionMatch
 
 class Island(targetChoice: AbstractCard) : AbstractCard(ISLAND, targetChoice) {
 
@@ -14,8 +18,8 @@ class Island(targetChoice: AbstractCard) : AbstractCard(ISLAND, targetChoice) {
     override val effectDefinition: EffectDefinition =
         EffectDefinition("CLEARS the Penalty on any one Flood or Flame.",
             setOf(
-                ClearOnTargetCondition(this, targetChoice) {
-                    it.map(::ConditionMatch)
+                ClearCondition {
+                    it.filter { card -> card.id == targetChoice.id }.map(::ConditionMatch)
                 }
             )
         )

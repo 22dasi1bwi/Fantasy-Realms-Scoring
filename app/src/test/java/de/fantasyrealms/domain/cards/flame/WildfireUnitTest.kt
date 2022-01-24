@@ -5,12 +5,12 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import assertk.assertions.isTrue
+import de.fantasyrealms.domain.cards.Suit
 import de.fantasyrealms.domain.cards.artifact.BookOfChanges
 import de.fantasyrealms.domain.cards.beast.Warhorse
 import de.fantasyrealms.domain.cards.flood.GreatFlood
 import de.fantasyrealms.domain.cards.flood.Swamp
 import de.fantasyrealms.domain.cards.handOf
-import de.fantasyrealms.domain.cards.leader.Princess
 import de.fantasyrealms.domain.cards.weapon.MagicWand
 import de.fantasyrealms.domain.cards.weather.Blizzard
 import de.fantasyrealms.domain.cards.weather.Rainstorm
@@ -37,12 +37,12 @@ class WildfireUnitTest {
         fun `Great Flood`() {
             val wildfire = Wildfire()
             // Great Flood won't be blanked and thus blanking all Flames including Wildfire
-            assertThat(wildfire.blanked).isFalse()
+            assertThat(wildfire.isBlanked()).isFalse()
             val hand = handOf(wildfire, GreatFlood())
 
             hand.getTotalScore()
 
-            assertThat(wildfire.blanked).isTrue()
+            assertThat(wildfire.isBlanked()).isTrue()
         }
 
         @Test
@@ -50,12 +50,12 @@ class WildfireUnitTest {
             val wildfire = Wildfire()
             // Island won't be blanked and thus clearing the penalties on Swamp
             val swamp = Swamp()
-            assertThat(swamp.cleared).isFalse()
+            assertThat(swamp.effectDefinition.conditions.all { it.status.isCleared() }).isFalse()
             val hand = handOf(wildfire, de.fantasyrealms.domain.cards.flood.Island(swamp), swamp)
 
             hand.getTotalScore()
 
-            assertThat(swamp.cleared).isTrue()
+            assertThat(swamp.effectDefinition.conditions.all { it.status.isCleared() }).isTrue()
         }
 
         @Test
@@ -78,7 +78,7 @@ class WildfireUnitTest {
 
             hand.getTotalScore()
 
-            assertThat(unicorn.blanked).isFalse()
+            assertThat(unicorn.isBlanked()).isFalse()
         }
 
         @Test
@@ -107,8 +107,8 @@ class WildfireUnitTest {
             hand.getTotalScore()
 
             assertAll {
-                assertThat(forge.blanked).isFalse()
-                assertThat(fireElemental.blanked).isFalse()
+                assertThat(forge.isBlanked()).isFalse()
+                assertThat(fireElemental.isBlanked()).isFalse()
             }
         }
 
@@ -136,7 +136,7 @@ class WildfireUnitTest {
 
             hand.getTotalScore()
 
-            assertThat(beastmaster.blanked).isFalse()
+            assertThat(beastmaster.isBlanked()).isFalse()
         }
 
         @Test
@@ -147,18 +147,18 @@ class WildfireUnitTest {
 
             hand.getTotalScore()
 
-            assertThat(magicWand.blanked).isFalse()
+            assertThat(magicWand.isBlanked()).isFalse()
         }
 
         @Test
         fun `Artifact`() {
             val wildfire = Wildfire()
-            val bookOfChanges = BookOfChanges()
+            val bookOfChanges = BookOfChanges(wildfire, Suit.FLAME)
             val hand = handOf(wildfire, bookOfChanges)
 
             hand.getTotalScore()
 
-            assertThat(bookOfChanges.blanked).isFalse()
+            assertThat(bookOfChanges.isBlanked()).isFalse()
         }
     }
 }

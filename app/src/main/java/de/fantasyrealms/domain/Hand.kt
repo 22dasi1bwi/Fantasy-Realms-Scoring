@@ -1,6 +1,10 @@
 package de.fantasyrealms.domain
 
-import de.fantasyrealms.EventLog
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.ignore
+import de.fantasyrealms.domain.condition.ConditionExecutor
+import de.fantasyrealms.domain.event.Event
+import de.fantasyrealms.domain.event.EventLog
 
 data class Hand(private val cards: Set<AbstractCard>) {
 
@@ -10,17 +14,15 @@ data class Hand(private val cards: Set<AbstractCard>) {
         val eventLog = EventLog.start()
 
         val scores = ordered
-            .flatMap { applyEffects(eventLog, it) }
+            .flatMap { applyEffects(it, eventLog) }
             .groupBy { it.effectReceiver }
             .map { (receiver, events) -> receiver.getScore(events) }
-        println(eventLog)
+        eventLog.end()
         return TotalScore(scores)
     }
 
-    private fun applyEffects(eventLog: EventLog, card: AbstractCard): List<Event> {
-        return card.effectDefinition.effects.fold(mutableListOf<Event>(BaseEvent(card))) { acc, condition ->
-            acc.addAll(condition.apply(eventLog, ordered))
-            acc
-        }
+    private fun applyEffects(handCard: AbstractCard, eventLog: EventLog): List<Event> {
+        val executor = ConditionExecutor(handCard, targets = ordered.ignore(handCard), eventLog)
+        return executor.applyConditions()
     }
 }

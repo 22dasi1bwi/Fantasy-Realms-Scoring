@@ -1,7 +1,13 @@
 package de.fantasyrealms.domain.cards.weather
 
-import de.fantasyrealms.domain.*
-import de.fantasyrealms.domain.Card.BLIZZARD
+import de.fantasyrealms.domain.EffectDefinition
+import de.fantasyrealms.domain.cards.AbstractCard
+import de.fantasyrealms.domain.cards.Card
+import de.fantasyrealms.domain.cards.Card.BLIZZARD
+import de.fantasyrealms.domain.cards.Suit
+import de.fantasyrealms.domain.condition.BlankCondition
+import de.fantasyrealms.domain.condition.ConditionMatch
+import de.fantasyrealms.domain.condition.PenaltyCondition
 
 private const val MODIFIER = -5
 
@@ -9,10 +15,10 @@ class Blizzard : AbstractCard(BLIZZARD) {
     override val effectDefinition: EffectDefinition = EffectDefinition(
         "PENALTY: Blanks all Floods, $MODIFIER for each Army, Leader, Beast, and Flame.",
         setOf(
-            BlankCondition(this) {
+            BlankCondition {
                 it.filter { card -> card.suit == Suit.FLOOD }.map(::ConditionMatch)
             },
-            ForEachCondition(this, EffectType.PENALTY) {
+            PenaltyCondition {
                 it.filter { card ->
                     card.suit == Suit.ARMY ||
                             card.suit == Suit.LEADER ||
