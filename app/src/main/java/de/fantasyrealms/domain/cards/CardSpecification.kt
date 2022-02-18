@@ -36,6 +36,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
     ISLAND(CardSpecification(9, "Island", 14, Suit.FLOOD)),
     SWAMP(CardSpecification(7, "Swamp", 18, Suit.FLOOD)),
     WATER_ELEMENTAL(CardSpecification(10, "Water Elemental", 4, Suit.FLOOD)),
+    FOUNTAIN_OF_LIFE(CardSpecification(6, "Fountain Of Life", 1, Suit.FLOOD)),
 
     // ----- LAND -----
     CAVERN(CardSpecification(2, "Cavern", 6, Suit.LAND)),
