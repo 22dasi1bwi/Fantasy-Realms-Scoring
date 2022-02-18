@@ -50,6 +50,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
     KING(CardSpecification(31, "King", 8, Suit.LEADER)),
     PRINCESS(CardSpecification(33, "Princess", 2, Suit.LEADER)),
     QUEEN(CardSpecification(32, "Queen", 6, Suit.LEADER)),
+    WARLORD(CardSpecification(34, "Warlord", 4, Suit.LEADER)),
 
     // ----- WEAPON -----
     MAGIC_WAND(CardSpecification(42, "Magic Wand", 1, Suit.WEAPON)),
