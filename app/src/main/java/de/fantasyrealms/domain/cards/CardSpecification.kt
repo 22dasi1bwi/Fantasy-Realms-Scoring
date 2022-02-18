@@ -55,6 +55,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
     // ----- WEAPON -----
     MAGIC_WAND(CardSpecification(42, "Magic Wand", 1, Suit.WEAPON)),
     SWORD_OF_KETH(CardSpecification(43, "Sword Of Keth", 7, Suit.WEAPON)),
+    ELVEN_LONGBOW(CardSpecification(44, "Elven Longbow", 3, Suit.WEAPON)),
 
     // ----- WEATHER -----
     BLIZZARD(CardSpecification(12, "Blizzard", 30, Suit.WEATHER)),
