@@ -10,64 +10,6 @@ import de.fantasyrealms.domain.event.Event
 import de.fantasyrealms.domain.event.EventLog
 import de.fantasyrealms.domain.event.ForEachEvent
 
-class CardConditionStatus(private val conditions: Set<Condition>) {
-
-    private val penaltyConditions =
-        conditions.filter { it.type == EffectType.PENALTY }.toMutableList()
-
-    private val blankConditions = conditions.filter { it.type == EffectType.BLANK }.toMutableList()
-
-    fun clear() {
-        penaltyConditions.clear()
-        blankConditions.clear()
-        penaltyConditions.forEach { it.blank() }
-    }
-
-    fun clear(suit: Suit) {
-        penaltyConditions.forEach {
-//            it.disable(suit)
-        }
-    }
-
-    fun isCleared(): Boolean {
-        return penaltyConditions.isEmpty() && blankConditions.isEmpty()
-    }
-}
-
-class ConditionStatus {
-
-    private var active: Boolean = true
-
-    private var cleared: Boolean = false
-
-    private var blanked: Boolean = false
-
-    fun blank() {
-        active = false
-        blanked = true
-    }
-
-    fun clear() {
-        cleared = true
-        blanked = false
-        active = true
-    }
-
-    fun isBlanked(): Boolean {
-        return blanked
-    }
-
-    fun isCleared(): Boolean {
-        return cleared
-    }
-
-    fun isActive(): Boolean {
-        return active
-    }
-
-
-}
-
 sealed class Condition(
     val type: EffectType,
     val effectAction: (List<AbstractCard>) -> List<ConditionMatch>,
@@ -118,6 +60,38 @@ sealed class Condition(
                 acc.add(ActionEvent(affectedTarget, target, type))
                 acc
             }
+    }
+}
+
+class ConditionStatus {
+
+    private var active: Boolean = true
+
+    private var cleared: Boolean = false
+
+    private var blanked: Boolean = false
+
+    fun blank() {
+        active = false
+        blanked = true
+    }
+
+    fun clear() {
+        cleared = true
+        blanked = false
+        active = true
+    }
+
+    fun isBlanked(): Boolean {
+        return blanked
+    }
+
+    fun isCleared(): Boolean {
+        return cleared
+    }
+
+    fun isActive(): Boolean {
+        return active
     }
 }
 
