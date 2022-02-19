@@ -64,6 +64,7 @@ enum class Card(private val cardSpecification: CardSpecification) {
     BLIZZARD(CardSpecification(12, "Blizzard", 30, Suit.WEATHER)),
     RAINSTORM(CardSpecification(11, "Rainstorm", 8, Suit.WEATHER)),
     SMOKE(CardSpecification(13, "Smoke", 27, Suit.WEATHER)),
+    WHIRLWIND(CardSpecification(14, "Whirlwind", 13, Suit.WEATHER)),
 
     // ----- WILD -----
     DOPPELGAENGER(CardSpecification(53, "Doppelgaenger", 0, Suit.WILD)),
