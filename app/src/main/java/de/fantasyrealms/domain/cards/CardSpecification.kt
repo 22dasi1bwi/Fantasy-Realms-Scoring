@@ -20,30 +20,30 @@ enum class Card(private val cardSpecification: CardSpecification) {
     // ----- BEAST -----
     BASILISK(CardSpecification(37, "Basilisk", 35, Suit.BEAST)),
     DRAGON(CardSpecification(39, "Dragon", 30, Suit.BEAST)),
+    HYDRA(CardSpecification(40, "Hydra", 12, Suit.BEAST)),
     UNICORN(CardSpecification(36, "Unicorn", 9, Suit.BEAST)),
     WARHORSE(CardSpecification(38, "Warhorse", 6, Suit.BEAST)),
-    HYDRA(CardSpecification(40, "Hydra", 12, Suit.BEAST)),
 
     // ----- FLAME -----
+    CANDLE(CardSpecification(17, "Candle", 2, Suit.FLAME)),
     FIRE_ELEMENTAL(CardSpecification(20, "Fire Elemental", 4, Suit.FLAME)),
     FORGE(CardSpecification(18, "Forge", 9, Suit.FLAME)),
     LIGHTNING(CardSpecification(19, "Lightning", 11, Suit.FLAME)),
     WILDFIRE(CardSpecification(16, "Wildfire", 40, Suit.FLAME)),
-    CANDLE(CardSpecification(17, "Candle", 2, Suit.FLAME)),
 
     // ----- FLOOD -----
+    FOUNTAIN_OF_LIFE(CardSpecification(6, "Fountain Of Life", 1, Suit.FLOOD)),
     GREAT_FLOOD(CardSpecification(8, "Great Flood", 32, Suit.FLOOD)),
     ISLAND(CardSpecification(9, "Island", 14, Suit.FLOOD)),
     SWAMP(CardSpecification(7, "Swamp", 18, Suit.FLOOD)),
     WATER_ELEMENTAL(CardSpecification(10, "Water Elemental", 4, Suit.FLOOD)),
-    FOUNTAIN_OF_LIFE(CardSpecification(6, "Fountain Of Life", 1, Suit.FLOOD)),
 
     // ----- LAND -----
+    BELL_TOWER(CardSpecification(3, "Bell Tower", 8, Suit.LAND)),
     CAVERN(CardSpecification(2, "Cavern", 6, Suit.LAND)),
     EARTH_ELEMENTAL(CardSpecification(5, "Earth Elemental", 4, Suit.LAND)),
     FOREST(CardSpecification(4, "Forest", 7, Suit.LAND)),
     MOUNTAIN(CardSpecification(1, "Mountain", 9, Suit.LAND)),
-    BELL_TOWER(CardSpecification(3, "Bell Tower", 8, Suit.LAND)),
 
     // ----- LEADER -----
     EMPRESS(CardSpecification(35, "Empress", 15, Suit.LEADER)),
@@ -53,13 +53,14 @@ enum class Card(private val cardSpecification: CardSpecification) {
     WARLORD(CardSpecification(34, "Warlord", 4, Suit.LEADER)),
 
     // ----- WEAPON -----
+    ELVEN_LONGBOW(CardSpecification(44, "Elven Longbow", 3, Suit.WEAPON)),
     MAGIC_WAND(CardSpecification(42, "Magic Wand", 1, Suit.WEAPON)),
     SWORD_OF_KETH(CardSpecification(43, "Sword Of Keth", 7, Suit.WEAPON)),
-    ELVEN_LONGBOW(CardSpecification(44, "Elven Longbow", 3, Suit.WEAPON)),
     WARSHIP(CardSpecification(41, "Warship", 23, Suit.WEAPON)),
     WAR_DIRIGIBLE(CardSpecification(45, "War Dirigible", 35, Suit.WEAPON)),
 
     // ----- WEATHER -----
+    AIR_ELEMENTAL(CardSpecification(15, "Air Elemental", 4, Suit.WEATHER)),
     BLIZZARD(CardSpecification(12, "Blizzard", 30, Suit.WEATHER)),
     RAINSTORM(CardSpecification(11, "Rainstorm", 8, Suit.WEATHER)),
     SMOKE(CardSpecification(13, "Smoke", 27, Suit.WEATHER)),
