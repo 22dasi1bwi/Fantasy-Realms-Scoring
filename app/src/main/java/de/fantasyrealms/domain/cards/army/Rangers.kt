@@ -18,6 +18,7 @@ class Rangers : AbstractCard(RANGERS) {
             },
             PartClearCondition(Suit.ARMY) {
                 it.flatMap { card ->
+                    // TODO: is this necessary?
                     if (card.effectDefinition.conditions.any { it is PenaltyCondition }) {
                         listOf(ConditionMatch(card))
                     } else {
