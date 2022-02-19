@@ -73,7 +73,8 @@ enum class Card(private val cardSpecification: CardSpecification) {
 
     // ----- WIZARD -----
     BEASTMASTER(CardSpecification(27, "Beastmaster", 9, Suit.WIZARD)),
-    ENCHANTRESS(CardSpecification(30, "Enchantress", 5, Suit.WIZARD));
+    ENCHANTRESS(CardSpecification(30, "Enchantress", 5, Suit.WIZARD)),
+    NECROMANCER(CardSpecification(28, "Necromancer", 3, Suit.WIZARD));
 
     val id = cardSpecification.id
     val cardName = cardSpecification.name
